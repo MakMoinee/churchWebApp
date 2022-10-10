@@ -1,16 +1,10 @@
-<?php
-ob_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <link rel="icon" href="/storage/images/favicon.ico" type="image/x-icon">
-    <title>Book Keeping</title>
+    <title>Dashboard</title>
     <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
@@ -83,11 +77,12 @@ ob_start();
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#loginModal"
-                            class="nav-link">Login</a></li>
+                    <li class="nav-item"><a href="/inputs" class="nav-link">Inputs</a></li>
+                    <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
+                    <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
+                    <li class="nav-item"><a href="/reports" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
+                            class="nav-link">Logout</a></li>
                     <!-- Modal -->
 
                 </ul>
@@ -95,189 +90,64 @@ ob_start();
         </div>
     </nav>
     <!-- END nav -->
-    <div class="hero-wrap">
-        <div class="home-slider owl-carousel">
-            <div class="slider-item" style="background-image:url(/storage/images/banner/1.jpg);">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-8 ftco-animate">
-                            <div class="text w-100 text-center">
-                                <h2>"Our heart is restless until it rests in Thee" (St. Augustine)</h2>
-                                <h1 class="mb-4">San Agustin Parish Church</h1>
-                                {{-- <p><a href="#" class="btn btn-white">Connect with us</a></p> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="slider-item" style="background-image:url(/storage/images/banner/2.jpg);">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-8 ftco-animate">
-                            <div class="text w-100 text-center">
-                                {{-- <h2>We Support Business</h2> --}}
-                                <h1 class="mb-4">Faith is to believe what you do not see; the reward of this faith is
-                                    to see what you believe</h1>
-                                {{-- <p><a href="#" class="btn btn-white">Connect with us</a></p> --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slider-item" style="background-image:url(/storage/images/banner/3.jpg);">
-                <div class="overlay"></div>
-                <div class="container">
-                    <div class="row no-gutters slider-text align-items-center justify-content-center">
-                        <div class="col-md-8 ftco-animate">
-                            <div class="text w-100 text-center">
-                                <h2>We Give Advice</h2>
-                                <h1 class="mb-4">Spiritual Advice</h1>
-                                <p><a href="#" class="btn btn-white">Connect with us</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <section class="ftco-section ftco-no-pt bg-light">
-        <div class="container">
-            <div class="row d-flex no-gutters">
-                <div class="col-md-6 d-flex">
-                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0"
-                        style="background-image:url(images/about.jpg);">
-                    </div>
-                </div>
-                <div class="col-md-6 pl-md-5 py-md-5">
-                    <div class="heading-section pl-md-4 pt-md-5">
-                        <span class="subheading">Welcome to Accounting</span>
-                        <h2 class="mb-4">We Are the Best Accounting Agency</h2>
-                    </div>
-                    <div class="services-2 w-100 d-flex">
-                        <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-wealth"></span></div>
-                        <div class="text pl-4">
-                            <h4>Market Analysis</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia
-                            </p>
-                        </div>
-                    </div>
-                    <div class="services-2 w-100 d-flex">
-                        <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-accountant"></span></div>
-                        <div class="text pl-4">
-                            <h4>Accounting Advisor</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia
-                            </p>
-                        </div>
-                    </div>
-                    <div class="services-2 w-100 d-flex">
-                        <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-teamwork"></span></div>
-                        <div class="text pl-4">
-                            <h4>General Consultancy</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia
-                            </p>
-                        </div>
-                    </div>
-                    <div class="services-2 w-100 d-flex">
-                        <div class="icon d-flex align-items-center justify-content-center"><span
-                                class="flaticon-accounting"></span></div>
-                        <div class="text pl-4">
-                            <h4>Structured Assestment</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center pb-5 mb-3">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <span class="subheading">News &amp; Blog</span>
-                    <h2>Latest news from our blog</h2>
-                </div>
-            </div>
-            <div class="row d-flex">
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20 rounded"
-                            style="background-image: url('images/image_1.jpg');">
-                        </a>
-                        <div class="text p-4">
-                            <div class="meta mb-2">
-                                <div><a href="#">March 31, 2020</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-                                </div>
-                            </div>
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                    the blind texts</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20 rounded"
-                            style="background-image: url('images/image_2.jpg');">
-                        </a>
-                        <div class="text p-4">
-                            <div class="meta mb-2">
-                                <div><a href="#">March 31, 2020</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-                                </div>
-                            </div>
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                    the blind texts</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20 rounded"
-                            style="background-image: url('images/image_3.jpg');">
-                        </a>
-                        <div class="text p-4">
-                            <div class="meta mb-2">
-                                <div><a href="#">March 31, 2020</a></div>
-                                <div><a href="#">Admin</a></div>
-                                <div><a href="#" class="meta-chat"><span class="fa fa-comment"></span> 3</a>
-                                </div>
-                            </div>
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about
-                                    the blind texts</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="ftco-section ftco-no-pb ftco-no-pt bg-secondary">
-        <div class="container py-5">
+    <section style="margin-top: -90px;" class="ftco-section">
+        <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-md-7 d-flex align-items-center">
-                    <h2 class="mb-3 mb-sm-0" style="color:black; font-size: 22px;">Sign Up for Your Free 1st
-                        Accounting Consultation</h2>
-                </div>
-                <div class="col-md-5 d-flex align-items-center">
-                    <form action="#" class="subscribe-form">
-                        <div class="form-group d-flex">
-                            <input type="text" class="form-control" placeholder="Enter email address">
-                            <input type="submit" value="Subscribe" class="submit px-3">
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
+                                        <h5 class="font-weight-bolder mb-0">
+                                            {{ $totalUsers }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Members</p>
+                                        <h5 class="font-weight-bolder mb-0">
+                                            0
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-7 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="d-flex flex-column h-100">
+                                        <p class="mb-3 pt-2 text-bold">
+                                            Quick Access</p>
+                                        <a href="/users" class="btn btn-primary">
+                                            Users</a>
+                                        <br>
+                                        <a href="/inputs" class="btn btn-primary">
+                                            Inputs</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
                 </div>
             </div>
         </div>
@@ -383,22 +253,35 @@ ob_start();
         </div>
     </footer>
 
-    @if (session()->pull('errorUserNotFound'))
+    @if (session()->pull('successLogin'))
         <script>
-            setTimeout(() => {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'warning',
-                    title: 'Wrong Username or Password, Please Try Again!',
-                    showConfirmButton: false,
-                    timer: 1300
-                });
-            }, 500);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Successfully Login',
+                showConfirmButton: false,
+                timer: 1300
+            });
         </script>;
-        {{ session()->forget('errorUserNotFound') }}
+        {{ session()->forget('successLogin') }}
     @endif
 
-
+    <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/logout" method="GET">
+                    <div class="modal-body">
+                        <h5 class="modal-title" id="logOutModalLabel">Do you want to proceed logging out ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Yes, Proceed</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -463,7 +346,15 @@ ob_start();
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
