@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChurchUsers;
+use App\Models\Roles;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
-class LoginController extends Controller
+class InputsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,13 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
         if (session()->exists('users')) {
             $user = session()->pull('users');
             session()->put('users', $user);
-            $count = count($user);
-            return view('dashboard', ['users' => $user, 'totalUsers' => $count]);
+
+            $userTypes = Roles::all();
+            $transactions = Transaction::paginate(5);
+            return view('inputs', ['users' => $user, 'userTypes' => $userTypes, 'transactions' => $transactions]);
         }
         return redirect('/');
     }
@@ -44,33 +45,29 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $un = $request->username;
-        $pw = $request->password;
+        if (session()->exists('users')) {
+            $user = session()->pull('users');
+            session()->put('users', $user);
 
-        if ($un != "" && $pw != "") {
-            $queryResult = ChurchUsers::where([['username', '=', $un]])->get();
-            $users =  json_decode($queryResult, true);
-            $user = [];
-            $newUsers = ChurchUsers::all();
-
-            $count = count($newUsers);
-            foreach ($users as $u) {
-                if (password_verify($pw, $u['password'])) {
-                    array_push($user, $u);
-                    break;
+            $userTypes = Roles::all();
+            if ($request['btnAdd']) {
+                $trans = new Transaction();
+                $trans->description = $request->description;
+                $trans->category = $request->category;
+                $trans->amount = $request->amount;
+                $trans->transactionDate = date('Y-m-d', strtotime($request->transdate));
+                $affectedRows = $trans->save();
+                if ($affectedRows > 0) {
+                    session()->put('successAddInput', true);
+                } else {
+                    session()->put('errorAddInput', true);
                 }
+            } else {
+                session()->put('errorAddInput', true);
             }
 
-            if (count($user) == 0) {
-                session()->put('errorUserNotFound', true);
-                return view('welcome');
-            } else {
-                session()->put('users', $user);
-                session()->put('successLogin', true);
-                return view('dashboard', ['users' => $user, 'totalUsers' => $count]);
-            }
+            return redirect('/inputs');
         } else {
-            Session::flush();
             return redirect('/');
         }
     }
