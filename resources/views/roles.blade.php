@@ -94,7 +94,7 @@
                         <div class="card-header pb-0">
                             <button class="btn btn-primary" style="margin-bottom: 20px;" data-toggle="modal"
                                 data-target="#exampleModal">Add
-                                Transaction</button>
+                                Roles</button>
 
                         </div>
                         <br>
