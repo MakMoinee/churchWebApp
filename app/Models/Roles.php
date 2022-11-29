@@ -14,8 +14,8 @@ class Roles extends Model
 
     protected $fillable = [
         'description',
-        'members',
+        'users',
         'inputs',
-        'announcements',
+        'chats',
     ];
 }

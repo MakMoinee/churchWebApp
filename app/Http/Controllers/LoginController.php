@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChurchUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -21,7 +22,15 @@ class LoginController extends Controller
             $user = session()->pull('users');
             session()->put('users', $user);
             $count = count($user);
-            return view('dashboard', ['users' => $user, 'totalUsers' => $count]);
+            $role = DB::table('roles')->where(['userType' => $user[0]['userType']])->get();
+            $decodeRole = json_decode($role, true);
+            $hasAccessToUsers = false;
+            foreach ($decodeRole as $r) {
+                if ($r['users'] == 1) {
+                    $hasAccessToUsers = true;
+                }
+            }
+            return view('dashboard', ['users' => $user, 'totalUsers' => $count, 'hasAccessUsers' => $hasAccessToUsers]);
         }
         return redirect('/');
     }
@@ -67,7 +76,15 @@ class LoginController extends Controller
             } else {
                 session()->put('users', $user);
                 session()->put('successLogin', true);
-                return view('dashboard', ['users' => $user, 'totalUsers' => $count]);
+                $role = DB::table('roles')->where(['userType' => $user[0]['userType']])->get();
+                $decodeRole = json_decode($role, true);
+                $hasAccessToUsers = false;
+                foreach ($decodeRole as $r) {
+                    if ($r['users'] == 1) {
+                        $hasAccessToUsers = true;
+                    }
+                }
+                return view('dashboard', ['users' => $user, 'totalUsers' => $count, 'hasAccessUsers' => $hasAccessToUsers]);
             }
         } else {
             Session::flush();

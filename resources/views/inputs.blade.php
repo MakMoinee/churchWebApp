@@ -474,8 +474,10 @@
                             </div>
                             <div class="form-group" style="margin-left: 30px;">
                                 <label for="category" class="category">Category</label>
-                                <input required type="text" name="category" id=""
-                                    style="margin-left: 17px;">
+                                <select name="category" id="category" style="margin-left: 17px;">
+                                    <option value="Expenses">Expenses</option>
+                                    <option value="Income">Income</option>
+                                </select>
                             </div>
                             <div class="form-group" style="margin-left: 30px;">
                                 <label for="amount" class="amount">Amount</label>
@@ -490,7 +492,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="btnAdd" value="true">Add Transaction</button>
+                    <button type="submit" class="btn btn-primary" name="btnAdd" value="true">Add
+                        Transaction</button>
                 </div>
                 </form>
             </div>
@@ -589,10 +592,10 @@
                                     '<li data-page="' +
                                     i +
                                     '">\
-                                                                        								  <span>' +
+                                                                            								  <span>' +
                                     i++ +
                                     '<span class="sr-only">(current)</span></span>\
-                                                                        								</li>'
+                                                                            								</li>'
                                 )
                                 .show();
                         } // end for i

@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InputsController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
@@ -30,6 +31,7 @@ Route::get('/logout', [SignOutController::class, 'index']);
 Route::resource('/users', UsersController::class);
 Route::resource('/inputs', InputsController::class);
 Route::post('/delete/transaction', [TransactionController::class, 'deleteTrans']);
+Route::resource('/roles', RolesController::class);
 
 Route::get('/convert-to-json', function () {
     return Transaction::paginate(5);

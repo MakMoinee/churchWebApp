@@ -109,13 +109,13 @@
                                                 Role Description</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Has Access To Member</th>
+                                                Has Access To Users</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Has Access To Inputs</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Has Access To Announcements</th>
+                                                Has Access To Chats</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Action</th>
@@ -147,7 +147,7 @@
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">
-                                                                @if ($role['members'] == 1)
+                                                                @if ($role['users'] == 1)
                                                                     true
                                                                 @else
                                                                     false
@@ -173,7 +173,7 @@
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">
-                                                                @if ($role['announcements'] == 1)
+                                                                @if ($role['chats'] == 1)
                                                                     true
                                                                 @else
                                                                     false

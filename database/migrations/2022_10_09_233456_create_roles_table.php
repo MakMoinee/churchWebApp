@@ -16,9 +16,9 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id('userType');
             $table->string('description');
-            $table->boolean('members');
+            $table->boolean('users');
             $table->boolean('inputs');
-            $table->boolean('announcements');
+            $table->boolean('chats');
             $table->timestamps();
         });
     }

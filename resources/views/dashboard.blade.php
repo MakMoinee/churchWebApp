@@ -71,9 +71,14 @@
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
-                    <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
+                    @if ($hasAccessUsers)
+                        <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
+                    @endif
+
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
                     <li class="nav-item"><a href="/reports" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
+                            target="_blank" class="nav-link">Chat</a></li>
                     <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
                             class="nav-link">Logout</a></li>
                     <!-- Modal -->
@@ -209,16 +214,7 @@
                     </div>
                     <div class="row mt-md-5">
                         <div class="col-md-12">
-                            <p class="copyright">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script> All rights reserved | This template is made with <i
-                                    class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                    target="_blank">Colorlib.com</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
+
                         </div>
                     </div>
                 </div>
