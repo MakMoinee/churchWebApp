@@ -74,6 +74,8 @@
                     <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
                     <li class="nav-item"><a href="/contact" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
+                        target="_blank" class="nav-link">Chat</a></li>
                     <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
                             class="nav-link">Logout</a></li>
                     <!-- Modal -->
