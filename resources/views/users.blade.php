@@ -188,33 +188,33 @@
                                                             <button style="text-transform: none;"
                                                                 class="btn badge-sm bg-gradient-success text-xs"
                                                                 data-toggle="modal"
-                                                                data-target="#viewModal{{ $role['id'] }}">View/Edit</button>
+                                                                data-target="#viewModal{{ $role['userID'] }}">View/Edit</button>
                                                             <button style="text-transform: none;margin-left: 10px;"
                                                                 class="btn badge-sm bg-gradient-danger text-xs"
                                                                 data-toggle="modal"
-                                                                data-target="#deleteViewModal{{ $role['id'] }}">
+                                                                data-target="#deleteViewModal{{ $role['userID'] }}">
                                                                 Delete
                                                             </button>
                                                             <div class="modal fade"
-                                                                id="deleteViewModal{{ $role['id'] }}" tabindex="-1"
+                                                                id="deleteViewModal{{ $role['userID'] }}" tabindex="-1"
                                                                 role="dialog"
-                                                                aria-labelledby="deleteViewModalLabel{{ $role['id'] }}"
+                                                                aria-labelledby="deleteViewModalLabel{{ $role['userID'] }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <form
-                                                                            action="{{ route('delete.user', ['id' => $role['uType']]) }}"
+                                                                            action="{{ route('users.destroy', ['user' => $role['userType']]) }}"
                                                                             method="POST"
                                                                             enctype="multipart/form-data">
                                                                             @method('delete')
                                                                             @csrf
                                                                             <div class="modal-body">
                                                                                 <h5 class="modal-title"
-                                                                                    id="deleteViewModalLabel{{ $role['uType'] }}">
+                                                                                    id="deleteViewModalLabel{{ $role['userType'] }}">
                                                                                     Do you want to
                                                                                     proceed deleting user ?</h5>
                                                                                 <input type="hidden" name="roleid"
-                                                                                    value="{{ $role['id'] }}">
+                                                                                    value="{{ $role['userID'] }}">
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="submit"
@@ -228,9 +228,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal fade" id="viewModal{{ $role['id'] }}"
+                                                            <div class="modal fade" id="viewModal{{ $role['userID'] }}"
                                                                 tabindex="-1" role="dialog"
-                                                                aria-labelledby="viewModalLabel{{ $role['id'] }}"
+                                                                aria-labelledby="viewModalLabel{{ $role['userID'] }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
@@ -241,7 +241,7 @@
                                                                             @csrf
                                                                             <div class="modal-header">
                                                                                 <h5 class="modal-title"
-                                                                                    id="viewModalLabel{{ $role['id'] }}">
+                                                                                    id="viewModalLabel{{ $role['userID'] }}">
                                                                                     View/Edit
                                                                                     User</h5>
                                                                                 <button type="button" class="close"
@@ -260,7 +260,7 @@
                                                                                             style="width:300px;">
                                                                                             <input type="hidden"
                                                                                                 name="id"
-                                                                                                value="{{ $role['id'] }}">
+                                                                                                value="{{ $role['userID'] }}">
                                                                                             <input required
                                                                                                 style="width: 350px;"
                                                                                                 id="username"
@@ -284,8 +284,7 @@
                                                                                                 name="password"
                                                                                                 placeholder="Password"
                                                                                                 title="Password"
-                                                                                                class="form-control"
-                                                                                                value="{{ $role['password'] }}">
+                                                                                                class="form-control">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group">
@@ -311,15 +310,15 @@
                                                                                         <select name="utype"
                                                                                             id="utype">
                                                                                             @foreach ($userTypes as $types)
-                                                                                                @if ($role['uType'] == $types['uType'])
+                                                                                                @if ($role['userType'] == $types['userType'])
                                                                                                     <option
-                                                                                                        value="{{ $types['uType'] }}"
+                                                                                                        value="{{ $types['userType'] }}"
                                                                                                         selected>
                                                                                                         {{ $types['description'] }}
                                                                                                     </option>
                                                                                                 @else
                                                                                                     <option
-                                                                                                        value="{{ $types['uType'] }}">
+                                                                                                        value="{{ $types['userType'] }}">
                                                                                                         {{ $types['description'] }}
                                                                                                     </option>
                                                                                                 @endif
@@ -548,7 +547,7 @@
                                 <label for="role" style="margin-left: 50px;" for="role">User Role:</label>
                                 <select name="utype" id="utype">
                                     @foreach ($userTypes as $types)
-                                        <option value="{{ $types['uType'] }}">{{ $types['description'] }}</option>
+                                        <option value="{{ $types['userType'] }}">{{ $types['description'] }}</option>
                                     @endforeach
                                 </select>
 
