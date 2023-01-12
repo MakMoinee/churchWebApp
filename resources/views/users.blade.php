@@ -73,9 +73,10 @@
                     <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
                     <li class="nav-item active"><a href="/users" class="nav-link">Users</a></li>
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
-                    <li class="nav-item"><a href="/reports?transdate={{date('Y-m-d',strtotime(now()))}}" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="/reports?transdate={{ date('Y-m-d', strtotime(now())) }}"
+                            class="nav-link">Reports</a></li>
                     <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
-                        target="_blank" class="nav-link">Chat</a></li>
+                            target="_blank" class="nav-link">Chat</a></li>
                     <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
                             class="nav-link">Logout</a></li>
                     <!-- Modal -->
@@ -198,8 +199,8 @@
                                                                 Delete
                                                             </button>
                                                             <div class="modal fade"
-                                                                id="deleteViewModal{{ $role['userID'] }}" tabindex="-1"
-                                                                role="dialog"
+                                                                id="deleteViewModal{{ $role['userID'] }}"
+                                                                tabindex="-1" role="dialog"
                                                                 aria-labelledby="deleteViewModalLabel{{ $role['userID'] }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -230,8 +231,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal fade" id="viewModal{{ $role['userID'] }}"
-                                                                tabindex="-1" role="dialog"
+                                                            <div class="modal fade"
+                                                                id="viewModal{{ $role['userID'] }}" tabindex="-1"
+                                                                role="dialog"
                                                                 aria-labelledby="viewModalLabel{{ $role['userID'] }}"
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -255,78 +257,84 @@
                                                                             </div>
                                                                             <div class="modal-body">
                                                                                 <div class="row">
-                                                                                    <div class="form-group">
-                                                                                        <label for="username"
-                                                                                            class="username">Username:</label>
-                                                                                        <div class="autocomplete"
-                                                                                            style="width:300px;">
-                                                                                            <input type="hidden"
-                                                                                                name="id"
-                                                                                                value="{{ $role['userID'] }}">
-                                                                                            <input required
-                                                                                                style="width: 350px;"
-                                                                                                id="username"
-                                                                                                type="text"
-                                                                                                name="username"
-                                                                                                placeholder="Username"
-                                                                                                title="Username"
-                                                                                                class="form-control"
-                                                                                                value="{{ $role['username'] }}">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="password"
-                                                                                            class="password">Password:</label>
-                                                                                        <div class="autocomplete"
-                                                                                            style="width:300px;">
-                                                                                            <input required
-                                                                                                style="width: 350px;"
-                                                                                                id="txtPassword"
-                                                                                                type="password"
-                                                                                                name="password"
-                                                                                                placeholder="Password"
-                                                                                                title="Password"
-                                                                                                class="form-control">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="cpassword"
-                                                                                            class="cpassword">Confirm
-                                                                                            Password:</label>
-                                                                                        <div class="autocomplete"
-                                                                                            style="width:300px;">
-                                                                                            <input required
-                                                                                                style="width: 350px;"
-                                                                                                id="txtConfirmPassword"
-                                                                                                type="password"
-                                                                                                name="cpassword"
-                                                                                                placeholder="Confirm Password"
-                                                                                                title="Confirm Password"
-                                                                                                class="form-control">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="role"
-                                                                                            for="role">User
-                                                                                            Role:</label>
-                                                                                        <select name="utype"
-                                                                                            id="utype">
-                                                                                            @foreach ($userTypes as $types)
-                                                                                                @if ($role['userType'] == $types['userType'])
-                                                                                                    <option
-                                                                                                        value="{{ $types['userType'] }}"
-                                                                                                        selected>
-                                                                                                        {{ $types['description'] }}
-                                                                                                    </option>
-                                                                                                @else
-                                                                                                    <option
-                                                                                                        value="{{ $types['userType'] }}">
-                                                                                                        {{ $types['description'] }}
-                                                                                                    </option>
-                                                                                                @endif
-                                                                                            @endforeach
-                                                                                        </select>
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="row"
+                                                                                            style="margin-left: 30px;">
+                                                                                            <div class="form-group">
+                                                                                                <label for="username"
+                                                                                                    class="username">Username:</label>
+                                                                                                <div class="autocomplete"
+                                                                                                    style="width:300px;">
+                                                                                                    <input
+                                                                                                        type="hidden"
+                                                                                                        name="id"
+                                                                                                        value="{{ $role['userID'] }}">
+                                                                                                    <input required
+                                                                                                        style="width: 350px;"
+                                                                                                        id="username"
+                                                                                                        type="text"
+                                                                                                        name="username"
+                                                                                                        placeholder="Username"
+                                                                                                        title="Username"
+                                                                                                        class="form-control"
+                                                                                                        value="{{ $role['username'] }}">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="password"
+                                                                                                    class="password">Password:</label>
+                                                                                                <div class="autocomplete"
+                                                                                                    style="width:300px;">
+                                                                                                    <input required
+                                                                                                        style="width: 350px;"
+                                                                                                        id="txtPassword"
+                                                                                                        type="password"
+                                                                                                        name="password"
+                                                                                                        placeholder="Password"
+                                                                                                        title="Password"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="cpassword"
+                                                                                                    class="cpassword">Confirm
+                                                                                                    Password:</label>
+                                                                                                <div class="autocomplete"
+                                                                                                    style="width:300px;">
+                                                                                                    <input required
+                                                                                                        style="width: 350px;"
+                                                                                                        id="txtConfirmPassword"
+                                                                                                        type="password"
+                                                                                                        name="cpassword"
+                                                                                                        placeholder="Confirm Password"
+                                                                                                        title="Confirm Password"
+                                                                                                        class="form-control">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="role"
+                                                                                                    for="role">User
+                                                                                                    Role:</label>
+                                                                                                <select name="utype"
+                                                                                                    id="utype">
+                                                                                                    @foreach ($userTypes as $types)
+                                                                                                        @if ($role['userType'] == $types['userType'])
+                                                                                                            <option
+                                                                                                                value="{{ $types['userType'] }}"
+                                                                                                                selected>
+                                                                                                                {{ $types['description'] }}
+                                                                                                            </option>
+                                                                                                        @else
+                                                                                                            <option
+                                                                                                                value="{{ $types['userType'] }}">
+                                                                                                                {{ $types['description'] }}
+                                                                                                            </option>
+                                                                                                        @endif
+                                                                                                    @endforeach
+                                                                                                </select>
 
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -417,7 +425,7 @@
                                             <h2 class="footer-heading">Discover</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="/about" class="py-1 d-block">About us</a></li>
-                                                
+
                                                 {{-- <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
                                                 </li>
                                                 <li><a href="#" class="py-1 d-block">Policies</a></li> --}}

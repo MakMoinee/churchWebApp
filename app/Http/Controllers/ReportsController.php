@@ -39,7 +39,7 @@ class ReportsController extends Controller
             $income = 0;
             $expense = 0;
             foreach ($trans as $t) {
-                $year = date('Y', strtotime($t['created_at']));
+                $year = date('Y', strtotime($t['transactionDate']));
 
                 if ($transDate != "") {
                     $desiredYear = date('Y', strtotime($transDate));
@@ -64,7 +64,7 @@ class ReportsController extends Controller
                     $expense += $t['amount'];
                 }
 
-                $month = date('m', strtotime($t['created_at']));
+                $month = date('m', strtotime($t['transactionDate']));
                 if (array_key_exists($month, $nMonth)) {
                     $nMonth[(int)$month] += 1;
                 } else {
@@ -80,6 +80,19 @@ class ReportsController extends Controller
                 }
             }
 
+            // dd([
+            //     'users' => $data,
+            //     'totalUsers' => $count,
+            //     'hasAccessUsers' => $hasAccessToUsers,
+            //     'monthArr' => count($nMonth) == 0 ? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] : $nMonth,
+            //     'total' => $total,
+            //     'income' => $income,
+            //     'expense' => $expense,
+            //     'incomePercent' => $total == 0 || $income == 0 ? 0 : $income / $total * 100,
+            //     'expensePercent' => $total == 0 || $expense == 0 ? 0 : $expense / $total * 100,
+            //     'transDate' => $transDate
+            // ]);
+
             return view('reports', [
                 'users' => $data,
                 'totalUsers' => $count,
@@ -88,8 +101,8 @@ class ReportsController extends Controller
                 'total' => $total,
                 'income' => $income,
                 'expense' => $expense,
-                'incomePercent' => $total == 0 || $income == 0 ? 0 : $income / $total * 100,
-                'expensePercent' => $total == 0 || $expense == 0 ? 0 : $expense / $total * 100,
+                'incomePercent' => $total == 0 || $income == 0 ? 0 : number_format($income / $total * 100, 2),
+                'expensePercent' => $total == 0 || $expense == 0 ? 0 : number_format($expense / $total * 100, 2),
                 'transDate' => $transDate
             ]);
         }

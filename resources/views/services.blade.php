@@ -1,10 +1,16 @@
+<?php
+ob_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <link rel="icon" href="/storage/images/favicon.ico" type="image/x-icon">
-    <title>Dashboard</title>
+    <title>Book Keeping</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
@@ -70,116 +76,177 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
-                    @if ($hasAccessUsers)
-                        <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
-                    @endif
-
-                    <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
-                    <li class="nav-item active"><a href="/reports" class="nav-link">Reports</a></li>
-                    <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
-                            target="_blank" class="nav-link">Chat</a></li>
-                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
-                            class="nav-link">Logout</a></li>
+                    <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
+                    <li class="nav-item active"><a href="/services" class="nav-link">Services</a></li>
+                    {{-- <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li> --}}
+                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#loginModal"
+                            class="nav-link">Login</a></li>
                     <!-- Modal -->
 
                 </ul>
             </div>
         </div>
     </nav>
-    <!-- END nav -->
 
     <section style="margin-top: -90px;" class="ftco-section">
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-lg-12">
-                    <center>
-                        <div class="col-lg-10">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h4 class="card-title mb-0">Transactions</h4>
-                                            <div class="small text-medium-emphasis">January - December
-                                                {{ date('Y', strtotime(now())) }}</div>
-                                        </div>
-                                        <div class="btn-toolbar d-none d-md-block" role="toolbar"
-                                            aria-label="Toolbar with buttons">
-                                            <form action="/reports" method="get">
-                                                <div class="btn-group btn-group-toggle mx-3"
-                                                    data-coreui-toggle="buttons">
-                                                    {{-- <input class="btn-check" id="option1" type="radio"
-                                                        name="options" autocomplete="off">
-                                                    <label class="btn btn-outline-secondary" style="margin-left: 10px;"> Day</label> --}}
-                                                    {{-- <input class="btn-check" id="option2" type="radio"
-                                                        name="options" autocomplete="off" checked=""
-                                                        style="margin-left: 10px;">
-                                                    <label class="btn btn-outline-secondary active"
-                                                        style="margin-left: 10px;"> Month</label> --}}
-                                                    <input style="float:left;" class="form-control" type="date"
-                                                        name="transdate" id=""
-                                                        value="{{ date('Y-m-d', strtotime($transDate)) }}">
-                                                    <button style="float: left;" class="btn btn-primary"
-                                                        type="submit">Enter</button>
-                                                    {{-- <input class="btn-check" id="option3" type="radio"
-                                                        name="options" autocomplete="off" style="margin-left: 10px;">
-                                                    <label class="btn btn-outline-secondary" style="margin-left: 10px;"> Year</label> --}}
-                                                </div>
-                                                <button class="btn btn-primary" type="button"
-                                                    data-coreui-toggle="modal" data-coreui-target="#showModuleModal"
-                                                    onclick="printModuleData()">
-                                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                                                    </svg>
-                                                </button>
-                                            </form>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <h1>Services Offered:</h1>
+                </div>
+            </div>
+            <div class="row">
 
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Baptismal Certificate</a>
+                                        </p>
 
-                                        </div>
-                                    </div>
-                                    <div class="c-chart-wrapper" style="height:auto;margin-top:40px;">
-                                        <center>
-                                            <canvas class="chart" id="main-chart2" height="403" width="403"
-                                                style="display: block; box-sizing: border-box;"></canvas>
-                                        </center>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row row-cols-1 row-cols-md-5 text-center">
-                                        <div class="col mb-sm-2 mb-0">
-                                            {{-- <div class="text-medium-emphasis"></div> --}}
-                                            <div class="fw-semibold"><b>Income:</b> PHP {{ $income }}
-                                                ({{ $incomePercent }}%)
-                                            </div>
-                                            <div class="progress progress-thin mt-2">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: {{ $incomePercent }}%" aria-valuenow="80"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-sm-2 mb-0">
-                                            {{-- <div class="text-medium-emphasis">Expenses</div> --}}
-                                            <div class="fw-semibold"><b>Expenses:</b> PHP {{ $expense }}
-                                                ({{ $expensePercent }}%)
-                                            </div>
-                                            <div class="progress progress-thin mt-2">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: {{ $expensePercent }}%"
-                                                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </center>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Christening</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Confession</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Communion</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Confirmation</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Wedding</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Burial</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 mt-2">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">
+                                            <a href="#">Annointing of Sick</a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    {{-- <section class="ftco-section ftco-no-pb ftco-no-pt bg-secondary">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-7 d-flex align-items-center">
+                    <h2 class="mb-3 mb-sm-0" style="color:black; font-size: 22px;">Sign Up for Your Free 1st
+                        Accounting Consultation</h2>
+                </div>
+                <div class="col-md-5 d-flex align-items-center">
+                    <form action="#" class="subscribe-form">
+                        <div class="form-group d-flex">
+                            <input type="text" class="form-control" placeholder="Enter email address">
+                            <input type="submit" value="Subscribe" class="submit px-3">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
 
     <footer class="footer">
@@ -221,10 +288,13 @@
                                             <h2 class="footer-heading">Discover</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="/about" class="py-1 d-block">About us</a></li>
-                                                {{-- <li><a href="#" class="py-1 d-block">Contact us</a></li> --}}
+
+                                                {{-- {{-- <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
+                                                </li>
+                                                <li><a href="#" class="py-1 d-block">Policies</a></li> --}}
                                             </ul>
                                         </div>
-                                        {{-- {{-- <div class="col-md-4 mb-md-0 mb-4">
+                                        {{-- <div class="col-md-4 mb-md-0 mb-4">
                                             <h2 class="footer-heading">Resources</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="#" class="py-1 d-block">Security</a></li>
@@ -275,31 +345,58 @@
         </div>
     </footer>
 
-    @if (session()->pull('successLogin'))
+    @if (session()->pull('errorUserNotFound'))
         <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Successfully Login',
-                showConfirmButton: false,
-                timer: 1300
-            });
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Wrong Username or Password, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 500);
         </script>;
-        {{ session()->forget('successLogin') }}
+        {{ session()->forget('errorUserNotFound') }}
     @endif
 
-    <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="/logout" method="GET">
-                    <div class="modal-body">
-                        <h5 class="modal-title" id="logOutModalLabel">Do you want to proceed logging out ?</h5>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <center>
+                                <div class="form-group">
+                                    <input required type="text" style="width:350px;margin-left: 50px;"
+                                        name="username" id="un" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input required type="password" style="width:350px;margin-left: 50px;"
+                                        name="password" id="pw" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <span style="margin-left: 270px;cursor: pointer;"><a href="#"
+                                            style="text-decoration: none;">Forgot
+                                            Password?</a></span>
+                                </div>
+                            </center>
+
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Yes, Proceed</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
                 </form>
             </div>
         </div>
@@ -328,95 +425,21 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/63856dbbdaff0e1306d9ee3e/1gj0j9atl';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script>
-        var month = {!! json_encode($monthArr, true) !!};
-        let monthData = []
-        if (month) {
-            for (let i = 0; i < 12; i++) {
-                let key = i + 1;
-                if (month.hasOwnProperty(key.toString())) {
-                    monthData.push(month[key]);
-                } else {
-                    monthData.push(0);
-                }
-            }
-        }
-
-        const labels = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ];
-
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Transactions',
-                backgroundColor: [
-                    'rgb(252, 186, 3)',
-                    'rgb(0, 186, 242)',
-                    'rgb(0, 209, 59)',
-                    'rgb(199, 0, 56)',
-                    'rgb(240, 0, 20)',
-                    'rgb(123, 255, 0)',
-                    'rgb(144, 0, 255)',
-                    'rgb(252, 102, 3)',
-                    'rgb(145, 175, 184)',
-                    'rgb(205, 255, 143)',
-                    'rgb(158, 0, 137)',
-                    'rgb(255, 99, 132)',
-                ],
-                borderColor: [
-                    'rgb(252, 186, 3)',
-                    'rgb(0, 186, 242)',
-                    'rgb(0, 209, 59)',
-                    'rgb(199, 0, 56)',
-                    'rgb(240, 0, 20)',
-                    'rgb(123, 255, 0)',
-                    'rgb(144, 0, 255)',
-                    'rgb(252, 102, 3)',
-                    'rgb(145, 175, 184)',
-                    'rgb(205, 255, 143)',
-                    'rgb(158, 0, 137)',
-                    'rgb(255, 99, 132)',
-                ],
-                data: monthData,
-                hoverOffset: 4
-            }]
-        };
-
-        const config = {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        };
-        new Chart(
-            document.getElementById('main-chart2'),
-            config
-        );
-    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>

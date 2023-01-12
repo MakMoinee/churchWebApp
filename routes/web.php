@@ -6,6 +6,7 @@ use App\Http\Controllers\InputsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SignOutController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
@@ -36,6 +37,7 @@ Route::post('/delete/transaction', [TransactionController::class, 'deleteTrans']
 Route::resource('/roles', RolesController::class);
 Route::resource('/reports', ReportsController::class);
 Route::get('/about', [AboutController::class, 'index']);
+Route::get('/services', [ServicesController::class, 'index']);
 
 Route::get('/convert-to-json', function () {
     return Transaction::paginate(5);
