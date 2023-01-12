@@ -1,10 +1,16 @@
+<?php
+ob_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <link rel="icon" href="/storage/images/favicon.ico" type="image/x-icon">
-    <title>Dashboard</title>
+    <title>Book Keeping</title>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap"
@@ -69,19 +75,12 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
-                    @if ($hasAccessUsers)
-                        <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
-                    @endif
-
-                    <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
-                    <li class="nav-item"><a href="/reports?transdate={{ date('Y-m-d', strtotime(now())) }}"
-                            class="nav-link">Reports</a></li>
-                    <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
-                            target="_blank" class="nav-link">Chat</a></li>
-                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
-                            class="nav-link">Logout</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a href="/about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
+                    {{-- <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li> --}}
+                    <li class="nav-item"><a href="#" data-toggle="modal" data-target="#loginModal"
+                            class="nav-link">Login</a></li>
                     <!-- Modal -->
 
                 </ul>
@@ -89,68 +88,63 @@
         </div>
     </nav>
     <!-- END nav -->
-
     <section style="margin-top: -90px;" class="ftco-section">
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Users</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            {{ $totalUsers }}
-                                        </h5>
-                                    </div>
+                <div class="col-lg-12">
+                    <h2 style="margin-left: 60px;"><b>Location: <a href="#">
+                                P-11, Poblacion, Valencia, Philippines</a></b></h2>
+                    <center>
+                        <div class="col-lg-6 col-sm-6 mb-xl-0 mb-4">
+                            <div class="mapouter">
+                                <div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas"
+                                        src="https://maps.google.com/maps?q=San%20Agustin%20Parish%20Church%20Valencia%20City&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                                        href="https://putlocker-is.org"></a><br>
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 500px;
+                                            width: 600px;
+                                        }
+                                    </style><a href="https://www.embedgooglemap.net">adding google map to website</a>
+                                    <style>
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 500px;
+                                            width: 600px;
+                                        }
+                                    </style>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Members</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            0
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-lg-7 mb-lg-0 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="d-flex flex-column h-100">
-                                        <p class="mb-3 pt-2 text-bold">
-                                            Quick Access</p>
-                                        <a href="/users" class="btn btn-primary">
-                                            Users</a>
-                                        <br>
-                                        <a href="/inputs" class="btn btn-primary">
-                                            Inputs</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
+                    </center>
                 </div>
             </div>
         </div>
     </section>
+
+
+    {{-- <section class="ftco-section ftco-no-pb ftco-no-pt bg-secondary">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-7 d-flex align-items-center">
+                    <h2 class="mb-3 mb-sm-0" style="color:black; font-size: 22px;">Sign Up for Your Free 1st
+                        Accounting Consultation</h2>
+                </div>
+                <div class="col-md-5 d-flex align-items-center">
+                    <form action="#" class="subscribe-form">
+                        <div class="form-group d-flex">
+                            <input type="text" class="form-control" placeholder="Enter email address">
+                            <input type="submit" value="Subscribe" class="submit px-3">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
 
     <footer class="footer">
@@ -192,7 +186,10 @@
                                             <h2 class="footer-heading">Discover</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="/about" class="py-1 d-block">About us</a></li>
-
+                                                
+                                                {{-- <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
+                                                </li>
+                                                <li><a href="#" class="py-1 d-block">Policies</a></li> --}}
                                             </ul>
                                         </div>
                                         {{-- <div class="col-md-4 mb-md-0 mb-4">
@@ -246,35 +243,22 @@
         </div>
     </footer>
 
-    @if (session()->pull('successLogin'))
+    @if (session()->pull('errorUserNotFound'))
         <script>
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Successfully Login',
-                showConfirmButton: false,
-                timer: 1300
-            });
+            setTimeout(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'warning',
+                    title: 'Wrong Username or Password, Please Try Again!',
+                    showConfirmButton: false,
+                    timer: 1300
+                });
+            }, 500);
         </script>;
-        {{ session()->forget('successLogin') }}
+        {{ session()->forget('errorUserNotFound') }}
     @endif
 
-    <div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="/logout" method="GET">
-                    <div class="modal-body">
-                        <h5 class="modal-title" id="logOutModalLabel">Do you want to proceed logging out ?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Yes, Proceed</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -339,15 +323,21 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="js/google-map.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/63856dbbdaff0e1306d9ee3e/1gj0j9atl';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>

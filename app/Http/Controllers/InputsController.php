@@ -103,7 +103,37 @@ class InputsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (session()->exists('users')) {
+            $user = session()->pull('users');
+            session()->put('users', $user);
+
+            if ($request['btnUpdate']) {
+
+                $queryResult = DB::table('transactions')->where([['transactionID', '=', $id]])->get();
+                if (count($queryResult) == 0) {
+                    session()->put('errorNonExisting', true);
+                    return redirect("/inputs");
+                }
+
+                $affectedRows = DB::table('transactions')->where([['transactionID', '=', $id]])->update([
+                    "description" => $request->description,
+                    "category" => $request->category,
+                    "amount" => $request->amount,
+                    "transactionDate" => date('Y-m-d', strtotime($request->transdate))
+                ]);
+
+                if ($affectedRows > 0) {
+                    session()->put('successUpdateInput', true);
+                } else {
+                    session()->put('errorUpdateInput', true);
+                }
+            } else {
+                session()->put('errorUpdateInput', true);
+            }
+            return redirect("/inputs");
+        } else {
+            return redirect("/");
+        }
     }
 
     /**

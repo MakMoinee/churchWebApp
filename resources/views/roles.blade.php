@@ -73,7 +73,7 @@
                     <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
                     <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
                     <li class="nav-item active"><a href="/roles" class="nav-link">Roles</a></li>
-                    <li class="nav-item"><a href="/reports" class="nav-link">Reports</a></li>
+                    <li class="nav-item"><a href="/reports?transdate={{date('Y-m-d',strtotime(now()))}}" class="nav-link">Reports</a></li>
                     <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
                             target="_blank" class="nav-link">Chat</a></li>
                     <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
@@ -331,8 +331,7 @@
                     <div class="row">
                         <div class="col-md-4 mb-md-0 mb-4">
                             <h2 class="footer-heading">About us</h2>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary
-                                regelialia.</p>
+                            <p>"Our heart is restless until it rests in Thee" (St. Augustine).</p>
                             <ul class="ftco-footer-social p-0">
                                 <li class="ftco-animate"><a href="#" data-toggle="tooltip"
                                         data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a>
@@ -349,7 +348,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-12 col-lg-10">
                                     <div class="row">
-                                        <div class="col-md-4 mb-md-0 mb-4">
+                                        {{-- <div class="col-md-4 mb-md-0 mb-4">
                                             <h2 class="footer-heading">Services</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="#" class="py-1 d-block">Market Analysis</a></li>
@@ -359,18 +358,18 @@
                                                 <li><a href="#" class="py-1 d-block">Structured Assestment</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-md-4 mb-md-0 mb-4">
                                             <h2 class="footer-heading">Discover</h2>
                                             <ul class="list-unstyled">
-                                                <li><a href="#" class="py-1 d-block">About us</a></li>
-                                                <li><a href="#" class="py-1 d-block">Contract us</a></li>
-                                                <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
+                                                <li><a href="/about" class="py-1 d-block">About us</a></li>
+                                                
+                                                {{-- <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
                                                 </li>
-                                                <li><a href="#" class="py-1 d-block">Policies</a></li>
+                                                <li><a href="#" class="py-1 d-block">Policies</a></li> --}}
                                             </ul>
                                         </div>
-                                        <div class="col-md-4 mb-md-0 mb-4">
+                                        {{-- <div class="col-md-4 mb-md-0 mb-4">
                                             <h2 class="footer-heading">Resources</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="#" class="py-1 d-block">Security</a></li>
@@ -378,7 +377,7 @@
                                                 <li><a href="#" class="py-1 d-block">Charts</a></li>
                                                 <li><a href="#" class="py-1 d-block">Privacy</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -390,7 +389,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
+                {{-- <div class="col-md-3 py-md-5 py-4 aside-stretch-right pl-lg-5">
                     <h2 class="footer-heading">Free consultation</h2>
                     <form action="#" class="form-consultation">
                         <div class="form-group">
@@ -409,7 +408,7 @@
                             <button type="submit" class="form-control submit px-3">Send A Message</button>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
     </footer>
