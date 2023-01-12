@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 29/11/2022 15:23:15
+ Date: 12/01/2023 18:47:00
 */
 
 SET NAMES utf8mb4;
@@ -29,11 +29,15 @@ CREATE TABLE `church_users`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of church_users
 -- ----------------------------
+INSERT INTO `church_users` VALUES (1, 'admin', '$2y$10$h2ZqY/0Of0PAOk7PPV1e7OBbyeTBZXGUkpC/4djTk3x70ip/trDru', '1', '2022-11-29 08:22:51', '2022-11-29 08:22:51');
+INSERT INTO `church_users` VALUES (2, 'user1', '$2y$10$41VWo7Kh/QSJE6UkObFsv.RK5VmrgooDYySm3d4UZDxG6D/RLKXYO', '3', '2022-11-29 08:32:45', '2022-11-29 08:32:45');
+INSERT INTO `church_users` VALUES (3, 'KING', '$2y$10$7oCHAkJnyI1C85Fs7Km5XemKUC6WJjRpPPBu68AiqNcBwZgvy4oY2', '3', '2023-01-12 09:56:20', '2023-01-12 09:56:20');
+INSERT INTO `church_users` VALUES (4, 'DONNA', '$2y$10$eueeWT.MyPwKLkRq/Olu9uDaguJFRbu7fSeWuYXISo3p6v.d2USeO', '1', '2023-01-12 09:56:58', '2023-01-12 09:56:58');
 
 -- ----------------------------
 -- Table structure for failed_jobs
@@ -49,7 +53,7 @@ CREATE TABLE `failed_jobs`  (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of failed_jobs
@@ -109,7 +113,7 @@ CREATE TABLE `personal_access_tokens`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
   INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -128,11 +132,13 @@ CREATE TABLE `roles`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`userType`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
+INSERT INTO `roles` VALUES (1, 'Administrator', 1, 1, 1, '2022-11-29 08:22:51', '2022-11-29 08:22:51');
+INSERT INTO `roles` VALUES (3, 'Encoder', 1, 0, 0, '2022-11-29 08:32:27', '2022-11-29 08:32:27');
 
 -- ----------------------------
 -- Table structure for transactions
@@ -147,11 +153,16 @@ CREATE TABLE `transactions`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`transactionID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of transactions
 -- ----------------------------
+INSERT INTO `transactions` VALUES (2, 'Baptismal Certificate', 'Income', 5000.00, '2023-01-12', '2023-01-12 07:05:15', '2023-01-12 07:05:15');
+INSERT INTO `transactions` VALUES (5, 'Baptismal Certificate Request = Juan Dela Cruz', 'Income', 500.00, '2022-12-16', '2023-01-12 09:40:11', '2023-01-12 09:40:11');
+INSERT INTO `transactions` VALUES (6, 'Change Bulb', 'Expenses', 1000.00, '2023-01-12', '2023-01-12 09:42:33', '2023-01-12 09:42:33');
+INSERT INTO `transactions` VALUES (7, 'Travel to Italy', 'Expenses', 100000.00, '2023-02-08', '2023-01-12 09:44:05', '2023-01-12 09:44:05');
+INSERT INTO `transactions` VALUES (8, 'Seminar', 'Expenses', 5000.00, '2023-03-29', '2023-01-12 09:52:58', '2023-01-12 09:52:58');
 
 -- ----------------------------
 -- Table structure for users
@@ -168,7 +179,7 @@ CREATE TABLE `users`  (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
