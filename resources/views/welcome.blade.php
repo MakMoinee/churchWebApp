@@ -319,7 +319,7 @@ ob_start();
                                                 
                                                 {{-- {{-- <li><a href="#" class="py-1 d-block">Terms &amp; Conditions</a>
                                                 </li>
-                                                <li><a href="#" class="py-1 d-block">Policies</a></li> --}} --}}
+                                                <li><a href="#" class="py-1 d-block">Policies</a></li> --}} 
                                             </ul>
                                         </div>
                                         {{-- <div class="col-md-4 mb-md-0 mb-4">
