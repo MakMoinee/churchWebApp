@@ -76,6 +76,7 @@
                     @endif
 
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
+                    <li class="nav-item"><a href="/accounting" class="nav-link">Acccounting</a></li>
                     <li class="nav-item"><a href="/reports?transdate={{ date('Y-m-d', strtotime(now())) }}"
                             class="nav-link">Reports</a></li>
                     <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"

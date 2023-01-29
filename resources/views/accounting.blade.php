@@ -76,8 +76,9 @@
                     @endif
 
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
-                    <li class="nav-item"><a href="/accounting" class="nav-link">Accounting</a></li>
-                    <li class="nav-item active"><a href="/reports" class="nav-link">Reports</a></li>
+                    <li class="nav-item active"><a href="/accounting" class="nav-link">Acccounting</a></li>
+                    <li class="nav-item"><a href="/reports?transdate={{ date('Y-m-d', strtotime(now())) }}"
+                            class="nav-link">Reports</a></li>
                     <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"
                             target="_blank" class="nav-link">Chat</a></li>
                     <li class="nav-item"><a href="#" data-toggle="modal" data-target="#logOutModal"
@@ -93,90 +94,19 @@
     <section style="margin-top: -90px;" class="ftco-section">
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-lg-12">
-                    <center>
-                        <div class="col-lg-10">
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h4 class="card-title mb-0">Transactions</h4>
-                                            <div class="small text-medium-emphasis">January - December
-                                                {{ date('Y', strtotime(now())) }}</div>
-                                        </div>
-                                        <div class="btn-toolbar d-none d-md-block" role="toolbar"
-                                            aria-label="Toolbar with buttons">
-                                            <form action="/reports" method="get">
-                                                <div class="btn-group btn-group-toggle mx-3"
-                                                    data-coreui-toggle="buttons">
-                                                    {{-- <input class="btn-check" id="option1" type="radio"
-                                                        name="options" autocomplete="off">
-                                                    <label class="btn btn-outline-secondary" style="margin-left: 10px;"> Day</label> --}}
-                                                    {{-- <input class="btn-check" id="option2" type="radio"
-                                                        name="options" autocomplete="off" checked=""
-                                                        style="margin-left: 10px;">
-                                                    <label class="btn btn-outline-secondary active"
-                                                        style="margin-left: 10px;"> Month</label> --}}
-                                                    <input style="float:left;" class="form-control" type="date"
-                                                        name="transdate" id=""
-                                                        value="{{ date('Y-m-d', strtotime($transDate)) }}">
-                                                    <button style="float: left;" class="btn btn-primary"
-                                                        type="submit">Enter</button>
-                                                    {{-- <input class="btn-check" id="option3" type="radio"
-                                                        name="options" autocomplete="off" style="margin-left: 10px;">
-                                                    <label class="btn btn-outline-secondary" style="margin-left: 10px;"> Year</label> --}}
-                                                </div>
-                                                <button class="btn btn-primary" type="button"
-                                                    data-coreui-toggle="modal" data-coreui-target="#showModuleModal"
-                                                    onclick="printModuleData()">
-                                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                                                    </svg>
-                                                </button>
-                                            </form>
 
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-12 mb-lg-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
 
-                                        </div>
-                                    </div>
-                                    <div class="c-chart-wrapper" style="height:auto;margin-top:40px;">
-                                        <center>
-                                            <canvas class="chart" id="main-chart2" height="403" width="403"
-                                                style="display: block; box-sizing: border-box;"></canvas>
-                                        </center>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="row row-cols-1 row-cols-md-5 text-center">
-                                        <div class="col mb-sm-2 mb-0">
-                                            {{-- <div class="text-medium-emphasis"></div> --}}
-                                            <div class="fw-semibold"><b>Income:</b> PHP {{ $income }}
-                                                ({{ $incomePercent }}%)
-                                            </div>
-                                            <div class="progress progress-thin mt-2">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                    style="width: {{ $incomePercent }}%" aria-valuenow="80"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col mb-sm-2 mb-0">
-                                            {{-- <div class="text-medium-emphasis">Expenses</div> --}}
-                                            <div class="fw-semibold"><b>Expenses:</b> PHP {{ $expense }}
-                                                ({{ $expensePercent }}%)
-                                            </div>
-                                            <div class="progress progress-thin mt-2">
-                                                <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: {{ $expensePercent }}%"
-                                                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </center>
+                    </div>
+                </div>
+                <div class="col-lg-5">
                 </div>
             </div>
         </div>
@@ -222,10 +152,10 @@
                                             <h2 class="footer-heading">Discover</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="/about" class="py-1 d-block">About us</a></li>
-                                                {{-- <li><a href="#" class="py-1 d-block">Contact us</a></li> --}}
+
                                             </ul>
                                         </div>
-                                        {{-- {{-- <div class="col-md-4 mb-md-0 mb-4">
+                                        {{-- <div class="col-md-4 mb-md-0 mb-4">
                                             <h2 class="footer-heading">Resources</h2>
                                             <ul class="list-unstyled">
                                                 <li><a href="#" class="py-1 d-block">Security</a></li>
@@ -305,6 +235,46 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form action="/login" method="POST" enctype="multipart/form-data" autocomplete="off">
+                            @csrf
+                            <center>
+                                <div class="form-group">
+                                    <input required type="text" style="width:350px;margin-left: 50px;"
+                                        name="username" id="un" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input required type="password" style="width:350px;margin-left: 50px;"
+                                        name="password" id="pw" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <span style="margin-left: 270px;cursor: pointer;"><a href="#"
+                                            style="text-decoration: none;">Forgot
+                                            Password?</a></span>
+                                </div>
+                            </center>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
@@ -337,86 +307,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script>
-        var month = {!! json_encode($monthArr, true) !!};
-        let monthData = []
-        if (month) {
-            for (let i = 0; i < 12; i++) {
-                let key = i + 1;
-                if (month.hasOwnProperty(key.toString())) {
-                    monthData.push(month[key]);
-                } else {
-                    monthData.push(0);
-                }
-            }
-        }
-
-        const labels = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ];
-
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Transactions',
-                backgroundColor: [
-                    'rgb(252, 186, 3)',
-                    'rgb(0, 186, 242)',
-                    'rgb(0, 209, 59)',
-                    'rgb(199, 0, 56)',
-                    'rgb(240, 0, 20)',
-                    'rgb(123, 255, 0)',
-                    'rgb(144, 0, 255)',
-                    'rgb(252, 102, 3)',
-                    'rgb(145, 175, 184)',
-                    'rgb(205, 255, 143)',
-                    'rgb(158, 0, 137)',
-                    'rgb(255, 99, 132)',
-                ],
-                borderColor: [
-                    'rgb(252, 186, 3)',
-                    'rgb(0, 186, 242)',
-                    'rgb(0, 209, 59)',
-                    'rgb(199, 0, 56)',
-                    'rgb(240, 0, 20)',
-                    'rgb(123, 255, 0)',
-                    'rgb(144, 0, 255)',
-                    'rgb(252, 102, 3)',
-                    'rgb(145, 175, 184)',
-                    'rgb(205, 255, 143)',
-                    'rgb(158, 0, 137)',
-                    'rgb(255, 99, 132)',
-                ],
-                data: monthData,
-                hoverOffset: 4
-            }]
-        };
-
-        const config = {
-            type: 'pie',
-            data: data,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
-        };
-        new Chart(
-            document.getElementById('main-chart2'),
-            config
-        );
     </script>
 </body>
 

@@ -73,6 +73,7 @@
                     <li class="nav-item"><a href="/inputs" class="nav-link">Transactions</a></li>
                     <li class="nav-item active"><a href="/users" class="nav-link">Users</a></li>
                     <li class="nav-item"><a href="/roles" class="nav-link">Roles</a></li>
+                    <li class="nav-item"><a href="/accounting" class="nav-link">Accounting</a></li>
                     <li class="nav-item"><a href="/reports?transdate={{ date('Y-m-d', strtotime(now())) }}"
                             class="nav-link">Reports</a></li>
                     <li class="nav-item"><a href="https://dashboard.tawk.to/#/admin/63856d77daff0e1306d9ee2d"

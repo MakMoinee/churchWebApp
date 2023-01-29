@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InputsController;
 use App\Http\Controllers\LoginController;
@@ -38,6 +39,7 @@ Route::resource('/roles', RolesController::class);
 Route::resource('/reports', ReportsController::class);
 Route::get('/about', [AboutController::class, 'index']);
 Route::get('/services', [ServicesController::class, 'index']);
+Route::resource("/accounting",AccountingController::class);
 
 Route::get('/convert-to-json', function () {
     return Transaction::paginate(5);
