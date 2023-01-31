@@ -138,7 +138,7 @@
                         <div class="card-header">
                             <center>
                                 <h3 class="mb-3 pt-2 text-bold">
-                                    <b>Journal Entries</b>
+                                    <b>General Ledger</b>
                                 </h3>
                             </center>
                         </div>

@@ -106,7 +106,7 @@
                                         <p class="mb-3 pt-2 text-bold">
                                             Quick Access</p>
                                         <a href="/journalizing" class="btn btn-primary" target="_blank">
-                                            Journal Entries</a>
+                                            General Ledger</a>
                                         <br>
                                         <a href="/incomestatement" class="btn btn-primary" target="_blank">
                                             Income Statement</a>

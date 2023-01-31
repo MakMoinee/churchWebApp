@@ -90,13 +90,13 @@
     </nav>
     <!-- END nav -->
 
-    <section style="margin-top: -90px;" class="ftco-section">
+    <section style="margin-top: -90px;" class="ftco-section" id="myCard">
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-lg-12">
                     <center>
                         <div class="col-lg-10">
-                            <div class="card mb-4">
+                            <div class="card mb-4" >
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <div>
@@ -129,12 +129,7 @@
                                                 <button class="btn btn-primary" type="button"
                                                     data-coreui-toggle="modal" data-coreui-target="#showModuleModal"
                                                     onclick="printModuleData()">
-                                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                                                    </svg>
+                                                    Print
                                                 </button>
                                             </form>
 
@@ -168,8 +163,8 @@
                                             </div>
                                             <div class="progress progress-thin mt-2">
                                                 <div class="progress-bar bg-danger" role="progressbar"
-                                                    style="width: {{ $expensePercent }}%"
-                                                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    style="width: {{ $expensePercent }}%" aria-valuenow="80"
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -417,6 +412,14 @@
             document.getElementById('main-chart2'),
             config
         );
+
+        function printModuleData() {
+            // var printContents = document.getElementById('myCard').innerHTML;
+            // var originalContents = document.body.innerHTML;
+            // document.body.innerHTML = printContents;
+            window.print();
+            // document.body.innerHTML = originalContents;
+        }
     </script>
 </body>
 

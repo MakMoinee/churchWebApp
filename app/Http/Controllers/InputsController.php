@@ -61,21 +61,21 @@ class InputsController extends Controller
             $userTypes = Roles::all();
             if ($request['btnAdd']) {
                 $amount = $request->amount;
-                if ($amount <= $totalAvail) {
-                    $trans = new Transaction();
-                    $trans->description = $request->description;
-                    $trans->category = $request->category;
-                    $trans->amount = $request->amount;
-                    $trans->transactionDate = date('Y-m-d', strtotime($request->transdate));
-                    $affectedRows = $trans->save();
-                    if ($affectedRows > 0) {
-                        session()->put('successAddInput', true);
-                    } else {
-                        session()->put('errorAddInput', true);
-                    }
+                // if ($amount <= $totalAvail) {
+                $trans = new Transaction();
+                $trans->description = $request->description;
+                $trans->category = $request->category;
+                $trans->amount = $request->amount;
+                $trans->transactionDate = date('Y-m-d', strtotime($request->transdate));
+                $affectedRows = $trans->save();
+                if ($affectedRows > 0) {
+                    session()->put('successAddInput', true);
                 } else {
-                    session()->put('errorExceedAvail', true);
+                    session()->put('errorAddInput', true);
                 }
+                // } else {
+                //     session()->put('errorExceedAvail', true);
+                // }
             } else {
                 session()->put('errorAddInput', true);
             }
