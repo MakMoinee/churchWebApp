@@ -102,8 +102,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <form action="/incomestatement" method="get">
-                            <input class="form-control" type="number" name="year" id=""
-                                pattern="[0-9]" placeholder="Enter Year" style="margin-left: 5px;">
+                            @if (isset($_GET['year']))
+                                <input class="form-control" type="number" name="year" id=""
+                                    pattern="[0-9]" placeholder="Enter Year" style="margin-left: 5px;"
+                                    value="{{ $_GET['year'] }}">
+                            @else
+                                <input class="form-control" type="number" name="year" id=""
+                                    pattern="[0-9]" placeholder="Enter Year" style="margin-left: 5px;">
+                            @endif
+
                             <br>
                         </form>
                     </div>

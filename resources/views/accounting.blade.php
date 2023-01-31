@@ -105,10 +105,10 @@
                                     <div class="d-flex flex-column h-100">
                                         <p class="mb-3 pt-2 text-bold">
                                             Quick Access</p>
-                                        <a href="/journalizing" class="btn btn-primary">
+                                        <a href="/journalizing" class="btn btn-primary" target="_blank">
                                             Journal Entries</a>
                                         <br>
-                                        <a href="/incomestatement" class="btn btn-primary">
+                                        <a href="/incomestatement" class="btn btn-primary" target="_blank">
                                             Income Statement</a>
                                     </div>
                                 </div>
