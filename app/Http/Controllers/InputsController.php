@@ -49,18 +49,32 @@ class InputsController extends Controller
             $user = session()->pull('users');
             session()->put('users', $user);
 
+            $queryAvail = DB::table('transactions')->orderByDesc('transactionDate')->get();
+            $tmpAvail = json_decode($queryAvail, true);
+            $totalAvail = 0;
+            foreach ($tmpAvail as $t) {
+                if ($t['category'] == 'Income') {
+                    $totalAvail += $t['amount'];
+                }
+            }
+
             $userTypes = Roles::all();
             if ($request['btnAdd']) {
-                $trans = new Transaction();
-                $trans->description = $request->description;
-                $trans->category = $request->category;
-                $trans->amount = $request->amount;
-                $trans->transactionDate = date('Y-m-d', strtotime($request->transdate));
-                $affectedRows = $trans->save();
-                if ($affectedRows > 0) {
-                    session()->put('successAddInput', true);
+                $amount = $request->amount;
+                if ($amount <= $totalAvail) {
+                    $trans = new Transaction();
+                    $trans->description = $request->description;
+                    $trans->category = $request->category;
+                    $trans->amount = $request->amount;
+                    $trans->transactionDate = date('Y-m-d', strtotime($request->transdate));
+                    $affectedRows = $trans->save();
+                    if ($affectedRows > 0) {
+                        session()->put('successAddInput', true);
+                    } else {
+                        session()->put('errorAddInput', true);
+                    }
                 } else {
-                    session()->put('errorAddInput', true);
+                    session()->put('errorExceedAvail', true);
                 }
             } else {
                 session()->put('errorAddInput', true);

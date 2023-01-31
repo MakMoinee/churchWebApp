@@ -3,7 +3,9 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncomeStatementController;
 use App\Http\Controllers\InputsController;
+use App\Http\Controllers\JournalizingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RolesController;
@@ -39,7 +41,10 @@ Route::resource('/roles', RolesController::class);
 Route::resource('/reports', ReportsController::class);
 Route::get('/about', [AboutController::class, 'index']);
 Route::get('/services', [ServicesController::class, 'index']);
-Route::resource("/accounting",AccountingController::class);
+Route::resource("/accounting", AccountingController::class);
+Route::resource("/journalizing", JournalizingController::class);
+Route::resource("/incomestatement", IncomeStatementController::class);
+
 
 Route::get('/convert-to-json', function () {
     return Transaction::paginate(5);

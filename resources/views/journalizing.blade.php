@@ -93,31 +93,124 @@
 
     <section style="margin-top: -90px;" class="ftco-section">
         <div class="container-fluid py-4">
-            <div class="row">
+            <div class="row" style="margin-left: 110px;">
+                <a href="/accounting" class="btn btn-primary">Go Back</a>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 110px;">
+                <h5 class="mb-3 pt-2 text-bold">Filter:</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="/journalizing" method="get">
+                            @if (isset($_GET['filterDate']))
+                                <input class="form-control" type="date" name="filterDate" id=""
+                                    style="margin-left: 20px;" value="<?php echo $_GET['filterDate']; ?>">
+                            @else
+                                <input class="form-control" type="date" name="filterDate" id=""
+                                    style="margin-left: 20px;">
+                            @endif
+                            <br>
+                            @if (isset($_GET['month']))
+                                <input type="checkbox" name="month" id="month"
+                                    style="cursor: pointer;margin-left: 5px;" onclick="setData('month')" checked>
+                            @else
+                                <input type="checkbox" name="month" id="month"
+                                    style="cursor: pointer;margin-left: 5px;" onclick="setData('month')">
+                            @endif
+                            <label for="month">Month</label>
+                            @if (isset($_GET['year']))
+                                <input type="checkbox" name="year" id="year"
+                                    style="cursor: pointer;margin-left: 5px;" onclick="setData('year')" checked>
+                            @else
+                                <input type="checkbox" name="year" id="year"
+                                    style="cursor: pointer;margin-left: 5px;" onclick="setData('year')">
+                            @endif
 
+                            <label for="year" class="for">Year</label>
+                            <button class="btn btn-primary" type="submit">Set Filter</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="row mt-4">
-                <div class="col-lg-12 mb-lg-0 mb-4">
+                <div class="col-lg-10 mb-lg-0 mb-4" style="margin-left: 110px;">
                     <div class="card">
+                        <div class="card-header">
+                            <center>
+                                <h3 class="mb-3 pt-2 text-bold">
+                                    <b>Journal Entries</b>
+                                </h3>
+                            </center>
+                        </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="d-flex flex-column h-100">
-                                        <p class="mb-3 pt-2 text-bold">
-                                            Quick Access</p>
-                                        <a href="/journalizing" class="btn btn-primary">
-                                            Journal Entries</a>
-                                        <br>
-                                        <a href="/incomestatement" class="btn btn-primary">
-                                            Income Statement</a>
-                                    </div>
+                                <div id="myTable" class="table-responsive p-0">
+                                    <table class="table table-striped align-items-center mb-0" id="table-id">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Date</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Description</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Debit</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Credit</th>
+                                                {{-- <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Action</th>
+                                                <th class="text-secondary opacity-7"></th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach ($transactions as $item)
+                                                <tr>
+                                                    <td>
+                                                        {{ $item['transactionDate'] }}
+                                                    </td>
+                                                    <td>{{ $item['description'] }}</td>
+                                                    <td>
+                                                        @if ($item['category'] == 'Income')
+                                                            ₱{{ $item['amount'] }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($item['category'] == 'Expenses')
+                                                            ₱{{ $item['amount'] }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td><b>Total</b></td>
+                                                <td></td>
+                                                <td><b>₱{{ $totalDebit }}</b></td>
+                                                <td>
+                                                    <b>
+                                                        @if ($totalCredit <= $totalDebit)
+                                                            ₱{{ $totalCredit }}
+                                                        @else
+                                                            <span style="color:red;">₱{{ $totalCredit }}</span>
+                                                        @endif
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                </div>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 110px;">
+                <button class="btn btn-info" onclick="printDiv('myTable')">Print</button>
             </div>
         </div>
     </section>
@@ -317,6 +410,25 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+
+        function setData(e) {
+            if (e == "year") {
+                let month = document.getElementById("month");
+                month.checked = false;
+            } else if (e == "month") {
+                let year = document.getElementById("year");
+                year.checked = false;
+            }
+        }
     </script>
 </body>
 

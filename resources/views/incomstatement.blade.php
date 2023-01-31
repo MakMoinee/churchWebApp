@@ -93,31 +93,124 @@
 
     <section style="margin-top: -90px;" class="ftco-section">
         <div class="container-fluid py-4">
-            <div class="row">
-
+            <div class="row" style="margin-left: 110px;">
+                <a href="/accounting" class="btn btn-primary">Go Back</a>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 110px;">
+                <h5 class="mb-3 pt-2 text-bold">Filter:</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form action="/incomestatement" method="get">
+                            <input class="form-control" type="number" name="year" id=""
+                                pattern="[0-9]" placeholder="Enter Year" style="margin-left: 5px;">
+                            <br>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="row mt-4">
-                <div class="col-lg-12 mb-lg-0 mb-4">
-                    <div class="card">
+                <div class="col-lg-10 mb-lg-0 mb-4" style="margin-left: 110px;">
+                    <div class="card" id="myTable">
+                        <div class="card-header">
+                            <center>
+                                <h3 class="pt-2 text-bold">
+                                    <b>San Agustin Parish Church</b>
+                                </h3>
+                                <h4 class="text-bold">
+                                    <b>Income Statement</b>
+                                </h4>
+                                <h5 class="text-bold">
+                                    @if (isset($_GET['year']))
+                                        For Year Ended: {{ $_GET['year'] }}
+                                    @else
+                                        For Year Ended: {{ date('Y', strtotime(now())) }}
+                                    @endif
+                                </h5>
+                            </center>
+                        </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="d-flex flex-column h-100">
-                                        <p class="mb-3 pt-2 text-bold">
-                                            Quick Access</p>
-                                        <a href="/journalizing" class="btn btn-primary">
-                                            Journal Entries</a>
-                                        <br>
-                                        <a href="/incomestatement" class="btn btn-primary">
-                                            Income Statement</a>
-                                    </div>
+                                <div class="table-responsive p-0">
+                                    <table class="table table-striped align-items-center mb-0" id="table-id">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><b>Gross Profit:</b></td>
+                                                <td><b>₱{{ $gross }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Utility Expense:</td>
+                                                <td>₱0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Petty Cash:</td>
+                                                @if ($pettyCash > 0)
+                                                    <td>₱{{ $pettyCash }}</td>
+                                                @else
+                                                    <td>₱0</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                <td>Supplies:</td>
+                                                @if ($supplyExpense > 0)
+                                                    <td>₱{{ $supplyExpense }}</td>
+                                                @else
+                                                    <td>₱0</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                <td>Other Expenses:</td>
+                                                @if ($otherExpense > 0)
+                                                    <td>₱{{ $otherExpense }}</td>
+                                                @else
+                                                    <td>₱0</td>
+                                                @endif
+                                            </tr>
+                                            <tr>
+                                                <td><b>Total Operating Expense:</b></td>
+                                                <td><b>₱{{ $totalOperatingExpense }}</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Net Income:</b></td>
+                                                <td>
+                                                    <b>
+                                                        @if ($netIncome >= 0)
+                                                            ₱{{ $netIncome }}
+                                                        @else
+                                                            -₱{{ $netIncome * -1 }}
+                                                        @endif
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                </div>
+            </div>
+            <br>
+            <div class="row" style="margin-left: 110px;">
+                <button class="btn btn-info" onclick="printDiv('myTable')">Print</button>
             </div>
         </div>
     </section>
@@ -317,6 +410,15 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script>
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
     </script>
 </body>
 

@@ -357,7 +357,7 @@
                 icon: 'success',
                 title: 'Successfully Updated Transaction',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('successUpdateInput') }}
@@ -370,7 +370,7 @@
                 icon: 'success',
                 title: 'Successfully Added Transaction',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('successAddInput') }}
@@ -383,10 +383,22 @@
                 icon: 'success',
                 title: 'Successfully Deleted Transaction',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('successDeleteTrans') }}
+    @endif
+    @if (session()->pull('errorExceedAvail'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'warning',
+                title: 'Failed To Add Transaction, Amount for Expenses Exceed Available Amount',
+                showConfirmButton: false,
+                timer: 800
+            });
+        </script>;
+        {{ session()->forget('errorExceedAvail') }}
     @endif
     @if (session()->pull('errorDeleteTrans'))
         <script>
@@ -395,7 +407,7 @@
                 icon: 'warning',
                 title: 'Failed To Delete Transaction',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('errorDeleteTrans') }}
@@ -408,7 +420,7 @@
                 icon: 'warning',
                 title: 'Failed To Update Transaction, Please Try Again',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('errorUpdateInput') }}
@@ -420,7 +432,7 @@
                 icon: 'warning',
                 title: 'Failed To Add Transaction',
                 showConfirmButton: false,
-                timer: 1300
+                timer: 800
             });
         </script>;
         {{ session()->forget('errorAddInput') }}
@@ -620,10 +632,10 @@
                                     '<li data-page="' +
                                     i +
                                     '">\
-                                                                                                								  <span>' +
+                                                                                                    								  <span>' +
                                     i++ +
                                     '<span class="sr-only">(current)</span></span>\
-                                                                                                								</li>'
+                                                                                                    								</li>'
                                 )
                                 .show();
                         } // end for i
